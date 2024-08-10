@@ -1,0 +1,7 @@
+.bg-img{
+    background-image: url("https://ik.imagekit.io/4z8covdo9/Food%20Store/foodmunch-banner-bg.png");
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-color: brown;
+    background-size: cover;
+}
