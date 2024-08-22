@@ -1,0 +1,136 @@
+WHAT IS HTML
+
+GIVE A 1 LINE EXPLAINATION
+WHY HTML IS USED :
+Ans: Html is used for developing websites and webpages.
+
+GIVE A 1 LINE EXPLAINATION
+WHAT IS EMMET ?
+Ans: Emmet is a short method of using html,like adding elements easily.
+
+1 LINES ANS
+WHAT IS SHORT CUT CREATE of Emmet Boiler plate of HTML ?
+Ans: Html:5
+
+ONLY THE SHORTCUT SYNTAX
+WHAT STRUCTURE OF HTML
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<Body>
+
+</Body>
+
+</html>
+
+WHAT IS HEAD TAG
+
+WHAT IS HEAD & LIST  TAGS COME INSIDE HEAD
+LIKE TITLE , META TAGS WITH AN EXAMPLE
+Ans: Head tags written above body tag.
+Head tags inside: 
+Meta charset
+Meta name 
+Title 
+
+WHAT IS BODY TAG
+
+WHAT IS BODY & LIST SOME TAGS COMES INSIDE BODY
+IMPORTANT 3 ELEMENTS OR TAGS
+
+Ans: Body is a tag that is used to provide whatever we write inside body
+        Tag it shows the output.
+   Body Tag inside : 
+        H1,P, Div,Ul,Li 
+
+
+HEADING :
+HEADING H1 - H6 EXAMPLE
+Ans: <h1>Welcome</h1>
+        <h2>Welcome</h2>
+        <h3>Welcome</h3>
+        <h4>Welcome</h4>
+        <h5>Welcome</h5>
+        <h6>Welcome</h6>
+
+
+PARGRAPH :
+EXAMPLE
+Ans: <P> Hi Everyone </P>
+
+BUTTON :
+EXAMPLE
+Ans: <button> Order products </button>
+
+WHAT IS DIFFERENT B/W ELEMENTS & TAGS IN HTML
+
+TAG - TWO POINTS WITH EXAMPLE
+Ans:  ∆Tag is used to display in screen.
+         ∆ Tag provides opening and closing tags 
+
+ELEMENTS - TWO POINTS WITH EXAMPLE
+Ans:  ∆ Elements is set of opening and closing tags.
+         ∆ Elements provide inside contents of tags.
+
+CSS
+WHAT IS CSS
+Ans:  CSS is a Cascading style sheet, that is used to design,
+         Styles,pages and different properties using CSS.
+
+GIVE A 1 LINE EXPLAINATION
+WHY IS CSS
+Ans:  CSS is used for designing the pages of html.
+
+GIVE A 1 LINE EXPLAINATION
+HOW TO CONNECT HTML & CSS
+Ans: <link rel="stylesheet" href="style.css">
+
+TAG USED -
+Emmet Short cut -
+HOW TO GET FONT & COLOR , IMAGE, CDN
+
+💡 Fonts - WEBSITE LINK - Google Fonts 
+
+💡 Color - WEBSITE LINK - Color picker
+
+💡 IMAGE - WEBSITE LINK - Free picker
+
+💡 CDN - WEBSITE LINK - ImageKit.io
+
+BASIC CSS FAMILY
+
+Text family:
+font-family: font-family: "Roboto";
+Color & Background family:
+color: color : red;
+REAMING ALL
+Box model:
+width and height: width:100px; and height:100px;
+REAMING ALL
+WHEN TO USE BACKGROUND IMG VS IMG TAG
+
+LAYOUT
+
+GIVE A 1 LINE EXPLAINATION About Layout
+FLEX
+Ans: Flex is used for layout purpose,if we use it default takes in horizontal direction.
+
+GIVE A 1 LINE EXPLAINATION
+WITH JUSTIFY CONTENT,ALIGN ITEMS,FLEX,FLEX WRAP,ORDER
+GRID
+Ans:  Justify content: It provides space between contents.
+          Align items : It provides align the items as center, Right Left.
+         Flex:  Flex is used for layout purpose,if we use it default takes in horizontal direction.
+         Flex Wrap: It is used Wrap the contents inside the container orderly.
+          Grid : Grid is used for making grid box as Grid-cols-1 ,grid-cols-2
+
+
+GIVE A 1 LINE EXPLAINATION
+WHAT TAILWIND
+Ans: Tailwind is a CSS type language, where we used for making responsive
+        Websites.
