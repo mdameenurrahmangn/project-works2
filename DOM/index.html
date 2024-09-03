@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom API</title>
+</head>
+<body>
+    <p id="para">Lorem, ipsum dolor sit </p>
+    <button id="btn">change text</button>
+
+    <script>
+    //getter methods
+    const btn = document.getElementById("btn")
+
+    const para = document.getElementById("para")
+
+    btn.addEventListener("click", () => {
+        para.textContent = "Color"
+    })
+    
+    </script>
+</body>
+</html>

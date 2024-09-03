@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini counter</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="2xl:container mx-auto">
+        <div class="w-[90%] mx-auto grid grid-cols-1">
+            <div class="beach">
+                <h1 class="count">Counter</h1>
+
+                <p id="digit" class="para">0</p>
+
+                <div>
+                    <button onclick="onDecrement()"
+                        class="dec border-2 border-black bg-red-600 text-white">Decrease</button>
+                    <button onclick="onReset()" class="res border-2 border-black bg-white-600 text-black">Reset</button>
+                    <button onclick="onIncrement()"
+                        class="inc border-2 border-black bg-green-600 text-black">Increase</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+
+        let original = document.getElementById("digit");
+
+        function onDecrement() {
+            let pre = original.textContent;
+            let updated = parseInt(pre) - 1;
+            if (updated > 0) {
+                original.style.color = "green";
+            } else if (updated < 0) {
+                original.style.color = "red";
+            } else {
+                original.style.color = "black";
+            }
+            original.textContent = updated;
+        }
+
+        function onReset() {
+            let counterValue = 0;
+            original.textContent = counterValue;
+            original.style.color = "black";
+        }
+
+        function onIncrement() {
+            let pre = original.textContent;
+            let updated = parseInt(pre) + 1;
+            if (updated > 0) {
+                original.style.color = "green";
+            } else if (updatedCounterValue < 0) {
+                original.style.color = "red";
+            } else {
+                original.style.color = "black";
+            }
+            original.textContent = updated;
+        }
+    </script>
+</body>
+
+</html>
