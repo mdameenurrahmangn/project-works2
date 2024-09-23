@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ama</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./Satoshi_Complete/Satoshi_Complete/Fonts/WEB/css/satoshi.css">
+
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 </head>
+
 <body>
     <div class="2xl:container mx-auto ">
         <div class="w-[90%] md:w-[50%] mx-auto grid grid-cols-1 pt-8">
@@ -80,20 +86,28 @@
 
     <div class="2xl:container mx-auto">
         <div class="w-[90%] md:w-[50%] mx-auto grid grid-cols-1 py-4">
-            <form class="space-y-3">
+            <form class="space-y-3" id="form">
                 <div class="flex flex-col gap-1">
                     <label class="font-semibold text-2xl" for="name">Name</label>
-                    <input class="border-2 p-2 rounded-2xl border-black" id="name" type="text" placeholder="Enter Your Name">
+                    <input class="border-2 p-2 rounded-2xl border-black" id="name" type="text"
+                        placeholder="Enter Your Name">
+                    <p id="nameError"></p>
                 </div>
 
                 <div class="flex flex-col gap-1">
                     <label class="font-semibold text-xl" for="email">Email</label>
-                    <input class="border-2 p-2 rounded-2xl border-black" type="email" placeholder="Enter Your Name">
+                    <input class="border-2 p-2 rounded-2xl border-black" placeholder="Enter Your Name">
+                    <p id="emailError"></p>
                 </div>
 
                 <div class="flex flex-col ">
                     <label class="font-semibold text-xl" for="textarea">Message me</label>
-                    <textarea class="border-2 p-2 rounded-2xl border-black" id="textarea" rows="5" cols="5" placeholder="Message me"></textarea> 
+                    <textarea class="border-2 p-2 rounded-2xl border-black" id="textarea" rows="5" cols="5"
+                        placeholder="Message me"></textarea>
+                </div>
+
+                <div class="">
+                    <button class="bg-black w-[15%] rounded-md h-9 text-white font-bold"> Submit</button>
                 </div>
             </form>
         </div>
@@ -141,5 +155,86 @@
         </div>
     </div>
     </div>
+
+    <script>
+
+        const fullform = document.getElementById("form");
+
+        const nametag = document.getElementById("name");
+        const emailtag = document.getElementById("email");
+        const areatag = document.getElementById("textarea");
+
+        const nameErrorTag = document.getElementById("nameError");
+        const emailErrorTag = document.getElementById("emailError");
+
+        nametag.addEventListener("blur", (e) => {
+
+            if (e.target.value === "") {
+                nameErrorTag.textContent = "Required";
+            }
+            else {
+                nameErrorTag.textContent = "";
+            }
+        });
+
+        emailtag.addEventListener("blur", (e) => {
+
+            if (e.target.value === "") {
+                emailErrorTag.textContent = "Required";
+            }
+            else {
+                emailErrorTag.textContent = "";
+            }
+        });
+
+        function valida(a, b, c) {
+            let emailExpress = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
+
+            if (b.match(emailExpress)) {
+                console.log("valid")
+            }
+            else {
+                console.log("Invalid")
+            }
+        }
+
+        function saveData(name,email,message)
+        {
+            const firebaseConfig = {
+                apiKey: "AIzaSyAzL5-r4EaaBPVfLH3jERaQo8XRMPxJQ1w",
+                authDomain: "portfolio-forms-a8af1.firebaseapp.com",
+                databaseURL: "https://portfolio-forms-a8af1-default-rtdb.asia-southeast1.firebasedatabase.app",
+                projectId: "portfolio-forms-a8af1",
+                storageBucket: "portfolio-forms-a8af1.appspot.com",
+                messagingSenderId: "1062777279538",
+                appId: "1:1062777279538:web:cfcf6f448215f07a02d82b"
+            };
+
+            if(!firebase.apps.length){
+                firebase.initializeApp(firebaseConfig);
+            }
+
+            firebase.initializeApp(firebaseConfig);
+
+            const db = firebase.database().ref("ReqForm");
+
+            db.push({
+                name: name,
+                email: email,
+                message: message,
+            });
+        }
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            valida(nametag.value, emailtag.value, areatag.value);
+
+            saveData(nametag.value,emailtag.value,areatag.value);
+
+        });
+
+    </script>
 </body>
+
 </html>
