@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>day-24</title>
+    <!--FireBase SDK-->
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+</head>
+
+<body>
+    <form id="docform">
+        <div>
+            <label for="email">Email</label>
+            <input id="emailing">
+            <p id="ErrorEmail"></p>
+        </div>
+
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="passwords">
+            <p id="ErrorPassword"></p>
+        </div>
+
+        <button type="submit" id="butn">Submit</button>
+
+        <script>
+            const emailElement = document.getElementById("emailing");
+            const passwordElement = document.getElementById("passwords");
+            const sumbtn = document.getElementById("btn");
+
+            const emailError = document.getElementById("ErrorEmail")
+            const passwordError = document.getElementById("ErrorPassword")
+
+            const form = document.getElementById("docform")
+
+            emailElement.addEventListener("blur", () => {
+                if (emailElement.value === "") {
+                    emailError.textContent = "*required to fill"
+                }
+                else {
+                    emailError.textContent = ""
+                }
+            })
+
+            passwordElement.addEventListener("blur", () => {
+                if (passwordElement.value === "") {
+                    passwordError.textContent = "*required to fill"
+                }
+                else {
+                    passwordError.textContent = ""
+                }
+            })
+
+
+            function validData(email, password) {
+
+                const express = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" // Regular Expression with condition
+
+                if (!emailtag.match(express)) {
+                    emailError.textContent = "Enter Valid Email Id"
+                    return false
+                }
+                else {
+                    emailError.textContent = ""
+                    return true
+                }
+            }
+
+            function saveData(email, password) {
+                const firebaseConfig = {
+                    apiKey: "AIzaSyAj9VaTBX-Pakcpa5PW0TbE8KJjZPQZA8U",
+                    authDomain: "data-forms-f7eda.firebaseapp.com",
+                    databaseURL: "https://data-forms-f7eda-default-rtdb.asia-southeast1.firebasedatabase.app",
+                    projectId: "data-forms-f7eda",
+                    storageBucket: "data-forms-f7eda.appspot.com",
+                    messagingSenderId: "1016665255738",
+                    appId: "1:1016665255738:web:f9f08ccb75017ff284aa03"
+                };
+
+                if (!firebase.apps.length)
+                {
+                    firebase.initializeApp(firebaseConfig);
+                }
+
+                const datastore = firebase.database().ref("good");
+
+                datastore.push({
+                    email:email,
+                    password:password
+                }).then(()=>{
+                    docform.reset()
+                })
+
+            }
+
+
+
+            docform.addEventListener("submit", (e) => {
+                e.preventDefault()
+
+                const email = emailElement.value;
+                const password = passwordElement.value;
+
+                if (validData(email, password)) {
+                    saveData(email, password);
+                }
+                else {
+                    console.log("forms are Invalid");
+                }
+            })
+
+        </script>
+
+    </form>
+</body>
+
+</html>
