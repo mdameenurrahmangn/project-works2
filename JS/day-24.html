@@ -14,13 +14,13 @@
 <body>
     <form id="docform">
         <div>
-            <label for="email">Email</label>
+            <label for="emailing">Email</label>
             <input id="emailing">
             <p id="ErrorEmail"></p>
         </div>
 
         <div>
-            <label for="password">Password</label>
+            <label for="passwords">Password</label>
             <input type="password" id="passwords">
             <p id="ErrorPassword"></p>
         </div>
@@ -36,6 +36,10 @@
             const passwordError = document.getElementById("ErrorPassword")
 
             const form = document.getElementById("docform")
+
+            /* 1.In form no value submit means,it shows required option,
+               2.We use this method         
+            */
 
             emailElement.addEventListener("blur", () => {
                 if (emailElement.value === "") {
@@ -55,12 +59,17 @@
                 }
             })
 
+            //-------------------------------------------------------------------------
+
+            /* 1.In form wrong email input means it shows ,write valid email.
+              2.We use this method         
+           */
 
             function validData(email, password) {
 
                 const express = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" // Regular Expression with condition
 
-                if (!emailtag.match(express)) {
+                if (!email.match(express)) {
                     emailError.textContent = "Enter Valid Email Id"
                     return false
                 }
@@ -81,26 +90,25 @@
                     appId: "1:1016665255738:web:f9f08ccb75017ff284aa03"
                 };
 
-                if (!firebase.apps.length)
-                {
+                if (!firebase.apps.length) {
                     firebase.initializeApp(firebaseConfig);
                 }
 
                 const datastore = firebase.database().ref("good");
 
                 datastore.push({
-                    email:email,
-                    password:password
-                }).then(()=>{
+                    email: email,
+                    password: password
+                })
+                .then(()=>{
                     docform.reset()
                 })
-
             }
 
 
 
             docform.addEventListener("submit", (e) => {
-                e.preventDefault()
+                e.preventDefault() // It wil stop refreshing
 
                 const email = emailElement.value;
                 const password = passwordElement.value;

@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./Satoshi_Complete/Satoshi_Complete/Fonts/WEB/css/satoshi.css">
 
+    <!--FireBase SDK-->
     <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
@@ -86,29 +87,142 @@
 
     <div class="2xl:container mx-auto">
         <div class="w-[90%] md:w-[50%] mx-auto grid grid-cols-1 py-4">
-            <form class="space-y-3" id="form">
+            <form class="space-y-3" id="docform">
                 <div class="flex flex-col gap-1">
-                    <label class="font-semibold text-2xl" for="name">Name</label>
-                    <input class="border-2 p-2 rounded-2xl border-black" id="name" type="text"
+                    <label class="font-semibold text-2xl" for="nameEle">Name</label>
+                    <input id="nameEle" class="border-2 p-2 rounded-2xl border-black" id="name" type="text"
                         placeholder="Enter Your Name">
-                    <p id="nameError"></p>
+                    <p id="ErrorName"></p>
                 </div>
 
                 <div class="flex flex-col gap-1">
-                    <label class="font-semibold text-xl" for="email">Email</label>
-                    <input class="border-2 p-2 rounded-2xl border-black" placeholder="Enter Your Name">
-                    <p id="emailError"></p>
+                    <label class="font-semibold text-xl" for="emailEle">Email</label>
+                    <input id="emailEle" class="border-2 p-2 rounded-2xl border-black" placeholder="Enter Your Name">
+                    <p id="ErrorEmail"></p>
                 </div>
 
                 <div class="flex flex-col ">
-                    <label class="font-semibold text-xl" for="textarea">Message me</label>
-                    <textarea class="border-2 p-2 rounded-2xl border-black" id="textarea" rows="5" cols="5"
+                    <label class="font-semibold text-xl" for="mesEle">Message me</label>
+                    <textarea id="mesEle" class="border-2 p-2 rounded-2xl border-black" id="textarea" rows="5" cols="5"
                         placeholder="Message me"></textarea>
+                    <p id="ErrorMes"></p>
                 </div>
 
                 <div class="">
-                    <button class="bg-black w-[15%] rounded-md h-9 text-white font-bold"> Submit</button>
+                    <button type="submit" id="btn" class="bg-black w-[15%] rounded-md h-9 text-white font-bold">
+                        Submit</button>
                 </div>
+
+                <script>
+                    const nameElement = document.getElementById("nameEle");
+                    const emailElement = document.getElementById("emailEle");
+                    const messageElement = document.getElementById("mesEle");
+                    const sumbtn = document.getElementById("btn");
+
+                    const nameError = document.getElementById("ErrorName")
+                    const emailError = document.getElementById("ErrorEmail")
+                    const mesError = document.getElementById("ErrorMes")
+
+                    const form = document.getElementById("docform")
+
+                    /* 1.In form no value submit means,it shows required option,
+                       2.We use this method         
+                    */
+
+                    nameElement.addEventListener("blur", () => {
+                        if (nameElement.value === "") {
+                            nameError.textContent = "*required to fill"
+                        }
+                        else {
+                            nameError.textContent = ""
+                        }
+                    })
+
+                    emailElement.addEventListener("blur", () => {
+                        if (emailElement.value === "") {
+                            emailError.textContent = "*required to fill"
+                        }
+                        else {
+                            emailError.textContent = ""
+                        }
+                    })
+
+                    messageElement.addEventListener("blur", () => {
+                        if (messageElement.value === "") {
+                            mesError.textContent = "*required to fill"
+                        }
+                        else {
+                            mesError.textContent = ""
+                        }
+                    })
+
+                    //-------------------------------------------------------------------------
+
+                    /* 1.In form wrong email input means it shows ,write valid email.
+                      2.We use this method         
+                   */
+
+                    function validData(name, email, message) {
+
+                        const express = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" // Regular Expression with condition
+
+                        if (!email.match(express)) {
+                            emailError.textContent = "Enter Valid Email Id"
+                            return false
+                        }
+                        else {
+                            emailError.textContent = ""
+                            return true
+                        }
+                    }
+
+                    function saveData(name, email, message) {
+                        const firebaseConfig = {
+                            apiKey: "AIzaSyAzL5-r4EaaBPVfLH3jERaQo8XRMPxJQ1w",
+                            authDomain: "portfolio-forms-a8af1.firebaseapp.com",
+                            databaseURL: "https://portfolio-forms-a8af1-default-rtdb.asia-southeast1.firebasedatabase.app",
+                            projectId: "portfolio-forms-a8af1",
+                            storageBucket: "portfolio-forms-a8af1.appspot.com",
+                            messagingSenderId: "1062777279538",
+                            appId: "1:1062777279538:web:cfcf6f448215f07a02d82b"
+                        };
+
+
+                        if (!firebase.apps.length) {
+                            firebase.initializeApp(firebaseConfig);
+                        }
+
+                        const datastore = firebase.database().ref("super");
+
+                        datastore.push({
+                            name:name,
+                            email: email,
+                            message: message
+                        }).then(()=>{
+                            docform.reset()
+                        })
+
+                    }
+
+
+
+                    docform.addEventListener("submit", (e) => {
+                        e.preventDefault() // It wil stop refreshing
+
+                        const name = nameElement.value;
+                        const email = emailElement.value;
+                        const message = messageElement.value;
+
+                        if (validData(name, email, message)) {
+                            saveData(name, email, message);
+                        }
+                        else {
+                            console.log("forms are Invalid");
+                        }
+                    })
+
+                </script>
+
             </form>
         </div>
     </div>
@@ -156,85 +270,7 @@
     </div>
     </div>
 
-    <script>
 
-        const fullform = document.getElementById("form");
-
-        const nametag = document.getElementById("name");
-        const emailtag = document.getElementById("email");
-        const areatag = document.getElementById("textarea");
-
-        const nameErrorTag = document.getElementById("nameError");
-        const emailErrorTag = document.getElementById("emailError");
-
-        nametag.addEventListener("blur", (e) => {
-
-            if (e.target.value === "") {
-                nameErrorTag.textContent = "Required";
-            }
-            else {
-                nameErrorTag.textContent = "";
-            }
-        });
-
-        emailtag.addEventListener("blur", (e) => {
-
-            if (e.target.value === "") {
-                emailErrorTag.textContent = "Required";
-            }
-            else {
-                emailErrorTag.textContent = "";
-            }
-        });
-
-        function valida(a, b, c) {
-            let emailExpress = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
-
-            if (b.match(emailExpress)) {
-                console.log("valid")
-            }
-            else {
-                console.log("Invalid")
-            }
-        }
-
-        function saveData(name,email,message)
-        {
-            const firebaseConfig = {
-                apiKey: "AIzaSyAzL5-r4EaaBPVfLH3jERaQo8XRMPxJQ1w",
-                authDomain: "portfolio-forms-a8af1.firebaseapp.com",
-                databaseURL: "https://portfolio-forms-a8af1-default-rtdb.asia-southeast1.firebasedatabase.app",
-                projectId: "portfolio-forms-a8af1",
-                storageBucket: "portfolio-forms-a8af1.appspot.com",
-                messagingSenderId: "1062777279538",
-                appId: "1:1062777279538:web:cfcf6f448215f07a02d82b"
-            };
-
-            if(!firebase.apps.length){
-                firebase.initializeApp(firebaseConfig);
-            }
-
-            firebase.initializeApp(firebaseConfig);
-
-            const db = firebase.database().ref("ReqForm");
-
-            db.push({
-                name: name,
-                email: email,
-                message: message,
-            });
-        }
-
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-
-            valida(nametag.value, emailtag.value, areatag.value);
-
-            saveData(nametag.value,emailtag.value,areatag.value);
-
-        });
-
-    </script>
 </body>
 
 </html>
